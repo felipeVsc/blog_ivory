@@ -17,12 +17,13 @@ def posts_check_empty_and_return_status_code(queryset):
 class posts_get_all_from_blog_view(APIView):
     def get(self,request,id):
         queryset = Post.objects.filter(blog=id).filter(published=True)
-        posts_check_empty_and_return_status_code(queryset)
+        
+        return posts_check_empty_and_return_status_code(queryset)
 
 class posts_find_by_id_view(APIView):
     def get(self,request,id):
         queryset = Post.objects.filter(id=id)
-        posts_check_empty_and_return_status_code(queryset)
+        return posts_check_empty_and_return_status_code(queryset)
 
 
 class posts_view(APIView):

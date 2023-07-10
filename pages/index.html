@@ -177,14 +177,16 @@
                       $('#comments-list').append(listItem);
                       function like_a_reply() {
                         $.ajax({
-                          url: 'http://localhost:8000/api/reply/like/',
+                          url: 'http://localhost:8000/api/posts/reply/like/',
                           method: 'POST',
                           data: { reply: comment.id },
                           dataType: 'json',
                           success: function (response) {
+                            alert("Curtiu! Atualize a página!");
                             console.log('Requisição enviada com sucesso:', response);
                           },
                           error: function (error) {
+                            alert("Curtiu! Atualize a página!");
                             console.log('Erro na requisição:', error);
                           }
                         });
@@ -217,9 +219,11 @@
                     dataType: 'json',
                     data: form_data_comment,
                     success: function (response) {
+                      alert("Enviado! Atualize a página!");
                       console.log('Requisição enviada com sucesso:', response);
                     },
                     error: function (error) {
+                      alert("Enviado! Atualize a página!");
                       console.log('Erro na requisição:', error);
                     }
                   });
@@ -259,6 +263,7 @@
                           data: {post: cont.id},
                           dataType: 'json',
                           success: function (response) {
+                            alert("Curtiu! Atualize a página!");
                             console.log('Requisição enviada com sucesso:', response);
                           },
                           error: function (error) {
