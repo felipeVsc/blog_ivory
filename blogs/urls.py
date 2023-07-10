@@ -27,11 +27,14 @@ urlpatterns = [
     path('api/posts/<int:id>/', posts_find_by_id_view.as_view()),
     path('api/posts/', posts_view.as_view()),
     path('api/posts/like/', posts_like_view.as_view()),
+
     path('api/posts/reply/', reply_view.as_view()),
+    path('api/posts/reply/<int:id>/', reply_find_by_id_view.as_view()),
     path('api/posts/reply/all/<int:post_id>/', reply_get_all_view.as_view()),
-    path('api/posts/reply/<int:post_id>/<int:reply_id>/', reply_find_by_id_view.as_view()),
+    path('api/posts/reply/<int:reply_id>/', reply_find_by_id_view.as_view()),
     path('api/posts/reply/like/<int:id>/', reply_get_likes_by_id_view.as_view()),
     path('api/posts/reply/like/', reply_likes_view.as_view()),
+    
     path('api/blogs/', blogs_view.as_view()),
     path('api/blogs/<int:id>/', blogs_find_by_id_view.as_view()),
     

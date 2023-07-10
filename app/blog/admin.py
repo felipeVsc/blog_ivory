@@ -3,6 +3,7 @@ from .models import Blog
 from django import forms
 from django.contrib.auth.models import User
 # Register your models here.
+
 @admin.action(description='Publish Blog')
 def publish_blog(modeladmin, request, queryset):
     queryset.update(published=True)

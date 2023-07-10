@@ -31,13 +31,6 @@ class PostAdmin(admin.ModelAdmin):
     ]
     exclude = ['created_at',"likes","deleted_at"]
 
-    # form = PostForm
-    # def get_form(self, request, obj=None, **kwargs):
-    #     kwargs["form"] = PostForm
-    #     form = super().get_form(request, obj, **kwargs)
-    #     form.user = request.user
-    #     return form
-
     def get_queryset(self, request):
         if request.user.is_authenticated:
             return super().get_queryset(request).filter(blog__author=request.user)

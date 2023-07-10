@@ -33,9 +33,6 @@ class posts_view(APIView):
 
         return Response(status=status.HTTP_200_OK)
     
-    def update(self,request):
-        pass
-
     def delete(self,request,pk):
         queryset = Post.objects.get(id=pk)
         queryset.update(published=False)
@@ -46,28 +43,25 @@ class posts_get_like_by_id_view(APIView):
     def get(self,request,pk):
         queryset = Post.objects.get(id=pk)
         likes_qnt = queryset.likes
-        serializer = PostSerializer(queryset)
         # Fazer a checagem de vazio e etc?
-        return Response(data=serializer.data,status=status.HTTP_200_OK)
+        return Response(data={"likes":likes_qnt},status=status.HTTP_200_OK)
 
 class posts_like_view(APIView):
 
     def post(self,request):
-        print(request.data)
         post_id = request.data['post']
         queryset = Post.objects.filter(id=post_id)
         likes_qnt = queryset.first().likes
         queryset.update(likes=likes_qnt+1)
         return Response(status=status.HTTP_200_OK)
 
-
-
-class reply_view(APIView):
+class reply_find_by_id_view(APIView):
     def get(self,request,id):
         queryset = Reply.objects.filter(post=id)
         serializer = ReplySerializer(queryset,many=True)
         return Response(data=serializer.data,status=status.HTTP_200_OK)
 
+class reply_view(APIView):
     def post(self,request):
         reply = Reply(
             post=Post.objects.get(id=request.data['post']),
@@ -86,8 +80,8 @@ class reply_get_all_view(APIView):
         serializer = ReplySerializer(queryset,many=True)
         return Response(data=serializer.data,status=status.HTTP_200_OK)
 class reply_find_by_id_view(APIView):
-    def get(self,request,post_id,reply_id):
-        queryset = Reply.objects.get(id=reply_id) # change here TODO
+    def get(self,request,reply_id):
+        queryset = Reply.objects.get(id=reply_id)
         serializer = ReplySerializer(queryset)
         # Fazer a checagem de vazio e etc?
         return Response(data=serializer.data,status=status.HTTP_200_OK)
@@ -101,7 +95,7 @@ class reply_likes_view(APIView):
     def post(self,request):
         reply_id = request.data['reply']
         queryset = Reply.objects.filter(id=reply_id)
-        print(queryset)
+
         likes_qnt = queryset.first().likes
         queryset.update(likes=likes_qnt+1)
 
