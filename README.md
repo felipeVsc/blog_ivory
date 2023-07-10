@@ -12,6 +12,10 @@ Foi escolhida essa abordagem, em detrimento do uso dos Templates do Django, para
 
 Foi utilizado o Django Admin para o controle de certas ações.
 
+### Vídeo de demonstração:
+
+https://youtu.be/4nguA_sWzS8
+
 ## Observações:
 
 Necessário ter instalado:
@@ -70,5 +74,5 @@ Você pode clicar sempre em "Blogs" no navbar para ir para a página inicial, da
     * blogs_find_by_id_view
     * author_view
     
-### Vídeo de demonstração:
+
 
