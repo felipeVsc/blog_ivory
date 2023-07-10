@@ -16,6 +16,10 @@ Foi utilizado o Django Admin para o controle de certas ações.
 
 https://youtu.be/4nguA_sWzS8
 
+### Tempo gasto
+
+Em média, 15 horas divididas em Sábado, Domingo e Segunda.
+
 ## Observações:
 
 Necessário ter instalado:
