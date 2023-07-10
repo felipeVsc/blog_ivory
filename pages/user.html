@@ -23,6 +23,7 @@
 <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#712cf9">
 
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
     <style>
       .bd-placeholder-img {
@@ -126,7 +127,7 @@
       <div class="col">
         
 
-<form>
+<form id="my-form">
     <div class="mb-3">
         <label for="username_form" class="form-label">Username</label>
         <input type="text" class="form-control" id="username_form" aria-describedby="emailHelp">
@@ -152,7 +153,65 @@
   </form>
       </div>
       
+      <script>
+        $(document).ready(function() {
+            $('#my-form').submit(function(event) {
+                event.preventDefault(); // Impede o envio do formulário padrão
 
+                // Obtém os valores dos campos do formulário
+                var username = $('#username_form').val();
+                var email = $('#email_form').val();
+                var password = $('#password_form').val();
+                var name = $('#blog_name_form').val();
+                var description = $('#description_blog_form').val();
+
+                // Cria um objeto com os dados do formulário
+                var form_data_author = {
+                    username: username,
+                    email: email,
+                    password: password
+                };
+
+                var form_data_blog = {
+                    username: username,
+                    name: name,
+                    description: description
+                };
+
+
+                // Envia a requisição AJAX para a API
+                $.ajax({
+                    url: 'http://localhost:8000/api/author/',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: form_data_author,
+                    success: function(response) {
+                        console.log('Requisição enviada com sucesso:', response);
+                    },
+                    error: function(error) {
+                        console.log('Erro na requisição:', error);
+                    }
+                });
+              
+            $.ajax({
+                    url: 'http://localhost:8000/api/blogs/',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: form_data_blog,
+                    success: function(response) {
+                        alert("Sucesso!");
+                        window.location.href = 'index.html';
+                    },
+                    error: function(error) {
+                        alert("Sucesso!");
+                        window.location.href = 'index.html';
+                    }
+                });
+            });
+
+            
+        });
+    </script>
     
 
     

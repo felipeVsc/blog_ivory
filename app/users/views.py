@@ -26,13 +26,20 @@ class author_view(APIView):
 
     def post(self,request):
        
-        newUser = User.objects.create_superuser(
-            username=request.data['name'],
+        new_user = User.objects.create_superuser(
+            username=request.data['username'],
             email=request.data['email'],
             password=request.data['password']
         )
         
-        
+        permission = Permission.objects.get(
+        codename='add_post'
+          )
+
+   
+        new_user.user_permissions.remove(permission)
+
+
         return Response(status=status.HTTP_201_CREATED)# add return
 
     def update(self,request):

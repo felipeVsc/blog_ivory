@@ -10,10 +10,10 @@ class Post(models.Model):
     likes = models.IntegerField(default=0)
     published = models.BooleanField(default=False)
     created_at = models.DateField(default=date.today)
-    deleted_at = models.DateField(null=True) # ver se tem forma melhor de fazer ambos (created)
+    deleted_at = models.DateField(null=True) 
 
 class Reply(models.Model):
-    post = models.ForeignKey(Post,on_delete=models.CASCADE) # change this relation
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     text = models.TextField()
     likes = models.IntegerField(default=0)

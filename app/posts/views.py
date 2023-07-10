@@ -16,8 +16,8 @@ class posts_get_all_from_blog_view(APIView):
 
 class posts_find_by_id_view(APIView):
     def get(self,request,id):
-        queryset = Post.objects.filter(id=id).first()
-        serializer = PostSerializer(queryset)
+        queryset = Post.objects.filter(id=id)
+        serializer = PostSerializer(queryset,many=True)
         # Fazer a checagem de vazio e etc?
         return Response(data=serializer.data,status=status.HTTP_200_OK)
 
@@ -52,7 +52,8 @@ class posts_get_like_by_id_view(APIView):
 
 class posts_like_view(APIView):
 
-    def put(self,request):
+    def post(self,request):
+        print(request.data)
         post_id = request.data['post']
         queryset = Post.objects.filter(id=post_id)
         likes_qnt = queryset.first().likes
@@ -62,16 +63,15 @@ class posts_like_view(APIView):
 
 
 class reply_view(APIView):
-    def get(self,request,pk):
-        queryset = Reply.objects.filter(post=pk)
+    def get(self,request,id):
+        queryset = Reply.objects.filter(post=id)
         serializer = ReplySerializer(queryset,many=True)
-        # Fazer a checagem de vazio e etc?
         return Response(data=serializer.data,status=status.HTTP_200_OK)
 
     def post(self,request):
         reply = Reply(
             post=Post.objects.get(id=request.data['post']),
-            name=request.data['name'],
+            name=request.data['username'],
             text=request.data['text']
         )
 
@@ -80,9 +80,14 @@ class reply_view(APIView):
         return Response(status=status.HTTP_201_CREATED)
  
 
+class reply_get_all_view(APIView):
+    def get(self,request,post_id):
+        queryset = Reply.objects.filter(post=post_id)
+        serializer = ReplySerializer(queryset,many=True)
+        return Response(data=serializer.data,status=status.HTTP_200_OK)
 class reply_find_by_id_view(APIView):
-    def get(self,request,pk):
-        queryset = Reply.objects.get(id=pk)
+    def get(self,request,post_id,reply_id):
+        queryset = Reply.objects.get(id=reply_id) # change here TODO
         serializer = ReplySerializer(queryset)
         # Fazer a checagem de vazio e etc?
         return Response(data=serializer.data,status=status.HTTP_200_OK)
@@ -93,9 +98,9 @@ class reply_get_likes_by_id_view(APIView):
         return Response(data={"likes:",queryset},status=status.HTTP_200_OK)
 
 class reply_likes_view(APIView):
-    def put(self,request):
-        replyid = request.data['reply']
-        queryset = Reply.objects.filter(id=replyid)
+    def post(self,request):
+        reply_id = request.data['reply']
+        queryset = Reply.objects.filter(id=reply_id)
         print(queryset)
         likes_qnt = queryset.first().likes
         queryset.update(likes=likes_qnt+1)

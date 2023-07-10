@@ -1,0 +1,4 @@
+cors
+django
+djagorest
+sqlite python
