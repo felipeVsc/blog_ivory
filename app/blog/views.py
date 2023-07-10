@@ -13,6 +13,11 @@ class blogs_find_by_id_view(APIView):
         return Response(data=serializer.data,status=status.HTTP_200_OK)
 
 class blogs_view(APIView):
+    """
+    Essa View tem os métodos: GET e POST.
+    GET => retornar todos os blogs, como, por exemplo, popular a página inicial.
+    POST => Irá receber do "Criar Blog" e realizar a criaçao do Blog automática, sendo um passo a menos que a criação via Django Admin.
+        """
     def get(self,request):
         queryset = Blog.objects.all()
         serializer = BlogSerializer(queryset,many=True)
