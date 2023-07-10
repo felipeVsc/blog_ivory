@@ -32,6 +32,8 @@ As atualizações não ocorrem em tempo real, sendo necessário dar um refresh n
 
 Você pode clicar sempre em "Blogs" no navbar para ir para a página inicial, dado que o botão voltar do navegador pode não funcionar dada a forma "Single Page" que foi construído o front-end.
 
+O arquivo "Modelagem ER.png" consta a modelagem utilizada no SQLITE.
+
 ### Requisitos
 
 * Blogs
